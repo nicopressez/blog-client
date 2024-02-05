@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { PropTypes } from "prop-types";
 
-const Comments = ({postid}) => {
-    const [comments, setComments] = useState()
+const Comments = ({postid, comments, setComments}) => {
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = fetch(`https://blog-serverapirest.fly.dev/api/posts/${postid}/comments`);
+                const response = await fetch(`https://blog-serverapirest.fly.dev/api/posts/${postid}/comments`);
                 setComments(await response.json())
             } catch(err) {
                 console.log(err)
             }
         } 
         fetchData()
-    },[postid])
+    },[postid,setComments])
     return (
         <div>
             {comments.map((comment) => (
@@ -30,6 +29,8 @@ const Comments = ({postid}) => {
 
 Comments.propTypes = {
     postid: PropTypes.string,
+    comments: PropTypes.array,
+    setComments: PropTypes.func,
 }
 
 export default Comments

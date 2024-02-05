@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 const Post = () => {
     const [post, setPost] = useState([]);
+    const [comments, setComments] = useState([])
     const {id} = useParams()
 
     useEffect(() => {
@@ -21,6 +24,8 @@ const Post = () => {
             <h2 className="mb-7 mt-2">Written on {post.date}</h2>
             <p>{post.text}</p>
             </div>
+            <CommentForm postid={id}  comments={comments} setComments={setComments}/>
+            <Comments postid={id} comments={comments} setComments={setComments}/>
         </div>
     )
 }
