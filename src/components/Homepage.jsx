@@ -9,6 +9,7 @@ const Homepage = () => {
             try {
                 const response = await fetch("https://blog-serverapirest.fly.dev/api/posts")
                 const obj = await response.json();
+                console.log(obj)
                 const visiblePosts = obj.filter((post) => post.visible === true)
                 setPosts(visiblePosts);
             } catch(err) {
